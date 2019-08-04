@@ -18,7 +18,8 @@ LIRI will search Spotify for songs, Bands in Town for concerts, and OMDB for mov
 
 Description
 
-Liri is a Node.js app that depends on user input from the command lineqaqypb
+Liri is a Node.js app that depends on user input from the command line
+
 Integrated Spotify, Bandsintown and OMDb APIs return information based in specific user input
 The following specific commands will return searc results from the API’s:
 liri node “concert-this” - to return recent band info and tour dates from Bandsintown API.
@@ -34,6 +35,7 @@ Bandsintown API (via npm module)
 Spotify API (via spotify npm module)
 OMDb API (via request npm module)
 Node Module Requirments
+
 You’ll need these Node packages to run this app in the command line
 Axios: https://www.npmjs.com/package/axios
 Node-Spotify-API: https://www.npmjs.com/package/node-spotify-api
