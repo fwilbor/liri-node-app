@@ -2,9 +2,11 @@ require("dotenv").config();
 
 var keys = require("./keys.js");
 
-// var spotify = new Spotify(keys.spotify);
+var spotify = new Spotify(keys.spotify);
 
-var Spotify = require('node-spotify-api');
+// var Spotify = require('node-spotify-api');
+var Spotify = require('spotify-web-api-js');
+var s = new Spotify();
 
 console.log(spotify);
 
@@ -14,6 +16,13 @@ var axios = require("axios");
 
 //Take in Command Line Argument of Artist Name for Spotify API
 var artist = process.argv[2];
+
+spotifyApi.getArtist('2hazSY4Ef3aB9ATXW7F5w3')
+    .then(function (data) {
+        console.log('Artist information', data);
+    }, function (err) {
+        console.error(err);
+    });
 
 
 // Run the axios.get function...
