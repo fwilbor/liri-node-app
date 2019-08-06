@@ -24,6 +24,9 @@ console.log(spotify);
 
 //Take in Command Line Argument for "Song Name" for Spotify API
 
+
+
+
 function song() {
     var commandLine = process.argv;
     var SongName = "";
@@ -42,23 +45,33 @@ function song() {
         secret: 'd74dd84e408148c59a5ee2983c707e9b'
     });
 
+    // helper function that grabs artist name
+    var getArtistNames = function (artist) {
+        return artist.name;
+    };
 
-    spotify.search({ type: 'track', query: SongName, limit: 10 }, function (err, data) {
+
+    var getSpotify = function (songName) {
+        if (songName === undefined) {
+            songName = "What's love got to do with it?"
+        }
+    };
+
+    spotify.search({ type: 'track', query: SongName }, function (err, data) {
         if (err) {
-            SongName = "";
-            console.log("Artist: " + songData.artists[0].name);
-            console.log("Song Title: " + songData.name);
-            console.log("Preview Track: " + songData.preview_url);
-            console.log("Album: " + songData.album.name);
-            song();
+            console.log("Error occurred: " + err);
+            return;
         }
 
-        for (var i = 0; i < data.tracks.items.length; i++) {
-            var songData = data.tracks.items[i];
-            console.log("Artist: " + songData.artists[0].name);
-            console.log("Song Title: " + songData.name);
-            console.log("Preview Track: " + songData.preview_url);
-            console.log("Album: " + songData.album.name);
+        var songs = data.tracks.items;
+
+        for (var i = 0; i < songs.length; i++) {
+            console.log("artists " + songs[i].artists.map(getArtistNames));
+            console.log("Song Title:" + songs[i].name);
+            console.log("Preview Track: " + songs[i].preview_url);
+            console.log("Album: " + songs[i].album.name);
+            console.log("-----------------------------------------------------------");
+
         }
     });
 }
@@ -94,50 +107,87 @@ function movieInfo(parameter) {
     });
 };
 
-movieInfo();
+// movieInfo();
 
 
 
 
-
-function getRandom() {
-    fs.readFile('random.txt', "utf8", function (error, data) {
-
-        if (error) {
-            return logIt(error);
-        }
-
-
+//function for running a command based on text file
+var readText = function () {
+    fs.readFile("random.txt", "utf8", function (error, data) {
+        console.log(data);
         var dataArr = data.split(",");
-
-        if (dataArr[0] === "spotify-this-song") {
-            var songcheck = dataArr[1].trim().slice(1, -1);
-            spotSong(songcheck);
+        if (dataArr.length === 2) {
+            chooseCommand(dataArr[0], dataArr[1]);
+        } else if (dataArr.lenth === 1) {
+            chooseCommand(dataArr[0]);
         }
-        else if (dataArr[0] === "concert-this") {
-            if (dataArr[1].charAt(1) === "'") {
-                var dLength = dataArr[1].length - 1;
-                var data = dataArr[1].substring(2, dLength);
-                console.log(data);
-                bandsInTown(data);
-            }
-            else {
-                var bandName = dataArr[1].trim();
-                console.log(bandName);
-                bandsInTown(bandName);
-            }
+    }
+    )
+}
 
-        }
-        else if (dataArr[0] === "movie-this") {
-            var movie_name = dataArr[1].trim().slice(1, -1);
-            movieInfo(movie_name);
-        }
 
-    });
+//function for determining the command- runs every time that liri runs
+var chooseCommand = function (caseData, functionData) {
+    switch (caseData) {
+        case "concert-this":
+            getBands(functionData);
+            break;
+        case "spotify-this-song":
+            getSpotify(functionData);
+            break;
+        case "movie-this":
+            findMoive(functionData);
+            break;
+        case "do-what-it-says":
+            randomText(functionData);
+            break;
+        default:
+            console.log("This will Run if nothing else does");
 
+    }
 };
 
-getRandom();
+
+
+
+//     fs.readFile('random.txt', "utf8", function (error, data) {
+
+//         if (error) {
+//             return logIt(error);
+//         }
+
+
+//         var dataArr = data.split(",");
+
+//         if (dataArr[0] === "spotify-this-song") {
+//             var songcheck = dataArr[1].trim().slice(1, -1);
+//             spotSong(songcheck);
+//         }
+//         else if (dataArr[0] === "concert-this") {
+//             if (dataArr[1].charAt(1) === "'") {
+//                 var dLength = dataArr[1].length - 1;
+//                 var data = dataArr[1].substring(2, dLength);
+//                 console.log(data);
+//                 bandsInTown(data);
+//             }
+//             else {
+//                 var bandName = dataArr[1].trim();
+//                 console.log(bandName);
+//                 bandsInTown(bandName);
+//             }
+
+//         }
+//         else if (dataArr[0] === "movie-this") {
+//             var movie_name = dataArr[1].trim().slice(1, -1);
+//             movieInfo(movie_name);
+//         }
+
+//     });
+
+// };
+
+// // getRandom();
 
 
 
