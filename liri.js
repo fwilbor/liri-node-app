@@ -20,18 +20,42 @@ var spotify = new Spotify({
 console.log(spotify);
 
 
+//function for determining the command- runs every time that liri runs
 
+let caseData = process.argv[2];
+
+switch (caseData) {
+    case "concert-this":
+        // getBands(functionData);
+        console.log('band stuff');
+        break;
+    case "spotify-this":
+        // getSpotify(functionData);
+        console.log('do spotify stuff')
+        break;
+    case "movie-this":
+        // findMoive(functionData);
+        console.log('movie stuff');
+        break;
+    case "do-what-it-says":
+        console.log('random stuff');
+        // randomText(functionData);
+        break;
+    default:
+        console.log("This will Run if nothing else does");
+
+}
+
+var options = process.argv.slice(3).join(' ');
+console.log(options);
 
 //Take in Command Line Argument for "Song Name" for Spotify API
 
-
-
-
-function song() {
-    var commandLine = process.argv;
+function song(options) {
+    var commandLine = options;
     var SongName = "";
-    for (var i = 2; i < commandLine.length; i++) {
-        if (i > 2 && i < commandLine.length) {
+    for (var i = 3; i < commandLine.length; i++) {
+        if (i > 3 && i < commandLine.length) {
             SongName = SongName + "+" + commandLine[i];
         }
         else {
@@ -76,7 +100,7 @@ function song() {
     });
 }
 
-song();
+// song();
 
 function movieInfo(parameter) {
 
@@ -126,27 +150,6 @@ var readText = function () {
     )
 }
 
-
-//function for determining the command- runs every time that liri runs
-var chooseCommand = function (caseData, functionData) {
-    switch (caseData) {
-        case "concert-this":
-            getBands(functionData);
-            break;
-        case "spotify-this-song":
-            getSpotify(functionData);
-            break;
-        case "movie-this":
-            findMoive(functionData);
-            break;
-        case "do-what-it-says":
-            randomText(functionData);
-            break;
-        default:
-            console.log("This will Run if nothing else does");
-
-    }
-};
 
 
 
