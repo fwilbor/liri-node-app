@@ -11,3 +11,18 @@ var spotifyKeys = {
 };
 
 module.exports.spotifyKeys = spotifyKeys;
+
+exports.bands = {
+
+    id: process.env.BANDS_ID
+};
+
+
+exports.movies = {
+
+    id: process.env.MOVIES_ID
+};
+
+
+
+
