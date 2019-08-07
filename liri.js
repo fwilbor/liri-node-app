@@ -1,3 +1,5 @@
+//Keys, Modules, and Files required for Liri to Work
+
 require("dotenv").config();
 
 var keys = require("./keys.js");
@@ -6,9 +8,12 @@ var keys = require("./keys.js");
 var fs = require("fs");
 
 
-
 // var Spotify = require('node-spotify-api');
 var Spotify = require('node-spotify-api');
+
+var axios = require("axios");
+
+var moment = require("moment");
 
 
 var spotify = new Spotify({
@@ -18,6 +23,9 @@ var spotify = new Spotify({
 
 
 console.log(spotify);
+
+var omdb = keys.movies.id;
+var bands = keys.bands.id;
 
 
 //function for determining the command- runs every time that liri runs
@@ -52,16 +60,32 @@ console.log(options);
 //Take in Command Line Argument for "Song Name" for Spotify API
 
 function song(options) {
-    var commandLine = options;
+    var stringWithSpaces = options;
     var SongName = "";
-    for (var i = 3; i < commandLine.length; i++) {
-        if (i > 3 && i < commandLine.length) {
-            SongName = SongName + "+" + commandLine[i];
-        }
-        else {
-            SongName += commandLine[i];
-        }
+    var newArray = []
+
+
+    var songName = ""
+
+    for (i = 0; i < res.length - 1; i++) {
+
+        songName = songName + res[i] + "+"
+
     }
+
+
+
+    console.log(songName)
+
+
+    // for (var i = 3; i < commandLine.length; i++) {
+    //     if (i > 3 && i < commandLine.length) {
+    //         SongName = SongName + "+" + commandLine[i];
+    //     }
+    //     else {
+    //         SongName += commandLine[i];
+    //     }
+    // }
 
     var Spotify = require('node-spotify-api');
     var spotify = new Spotify({
