@@ -6,6 +6,10 @@ var keys = require("./keys.js");
 
 // var Spotify = require('node-spotify-api');
 var Spotify = require('node-spotify-api');
+// var spotify = new Spotify({
+//     id: '70b41a5fbe9443ab82ba13867d733702',
+//     secret: 'd74dd84e408148c59a5ee2983c707e9b'
+// });
 
 var axios = require("axios");
 
@@ -13,10 +17,7 @@ var moment = require("moment");
 
 var fs = require("fs");
 
-// var spotify = new Spotify({
-//     id: '70b41a5fbe9443ab82ba13867d733702',
-//     secret: 'd74dd84e408148c59a5ee2983c707e9b'
-// });
+
 
 var spotify = new Spotify(keys.spotify);
 
@@ -61,7 +62,7 @@ var getSpotify = function (songName) {
 };
 
 
-var getMyBands = function (artist) {
+var getBands = function (artist) {
     var queryURL = "https://rest.bandsintown.com/artists/" + artist + "08604aa59856ce06c5cda48314b74c4e";
     axios.get(queryURL).then(
         function (response) {
@@ -91,7 +92,7 @@ var getMyBands = function (artist) {
 };
 
 // Function for running a Movie Search
-var getMeMovie = function (movieName) {
+var getMovie = function (movieName) {
     if (movieName === undefined) {
         movieName = "Mr Nobody";
     }
@@ -131,20 +132,23 @@ var pick = function (caseData, functionData) {
     switch (caseData) {
         case "concert-this":
             // getBands(functionData);
+            getBands(functionData);
             console.log('band stuff');
             break;
         case "spotify-this":
-
             // getSpotify(functionData);
+            getSpotify(functionData);
             console.log('do spotify stuff')
             break;
         case "movie-this":
             // findMoive(functionData);
+            getMovie(functionData);
             console.log('movie stuff');
             break;
         case "do-what-it-says":
-            console.log('random stuff');
             // randomText(functionData);
+            doWhatItSays(functionData);
+            console.log('random stuff');
             break;
         default:
             console.log("LIRI doesn't know that");
