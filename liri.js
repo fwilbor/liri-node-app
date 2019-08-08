@@ -50,7 +50,7 @@ var getSpotify = function (songName) {
             var songs = data.tracks.items;
 
             for (var i = 0; i < songs.length; i++) {
-                console.log("artist(s): " + songs[i].artists.map(getArtistNames));
+                console.log("Artist(s): " + songs[i].artists.map(getArtistNames));
                 console.log("Song Name: " + songs[i].name);
                 console.log("Preview Track: " + songs[i].preview_url);
                 console.log("Album: " + songs[i].album.name);
