@@ -23,7 +23,7 @@ Liri is a Node.js app that depends on user input from the command line
 Integrated Spotify, Bandsintown and OMDb APIs return information based in specific user input
 The following specific commands will return searc results from the API’s:
 liri node “concert-this” - to return recent band info and tour dates from Bandsintown API.
-liri node “spotify-this-song” and a “song-name” - to return search results based on the song-name entry.
+liri node “spotify-this” and a “song-name” - to return search results based on the song-name entry.
 liri node “movie-this” and a “movie-name” - to return search results based on the movie-name entry.
 liri node “do-what-it-says” - to access and execute the data command in the random.txt file.
 

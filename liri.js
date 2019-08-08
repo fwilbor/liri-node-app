@@ -6,10 +6,6 @@ var keys = require("./keys.js");
 
 // var Spotify = require('node-spotify-api');
 var Spotify = require('node-spotify-api');
-// var spotify = new Spotify({
-//     id: '70b41a5fbe9443ab82ba13867d733702',
-//     secret: 'd74dd84e408148c59a5ee2983c707e9b'
-// });
 
 var axios = require("axios");
 
@@ -31,7 +27,9 @@ var bands = keys.bands.id;
 
 //function for determining the command- runs every time that liri runs
 
-
+var getArtistNames = function (artist) {
+    return artist.name;
+};
 //function that calls Spotify
 
 var getSpotify = function (songName) {
@@ -41,7 +39,8 @@ var getSpotify = function (songName) {
     spotify.search(
         {
             type: "track",
-            query: songName
+            query: songName,
+            limit: 10
         },
         function (err, data) {
             if (err) {
@@ -51,10 +50,11 @@ var getSpotify = function (songName) {
             var songs = data.tracks.items;
 
             for (var i = 0; i < songs.length; i++) {
-                console.log("Artist: " + songs[i].artists.map(getArtistNames));
+                console.log("artist(s): " + songs[i].artists.map(getArtistNames));
                 console.log("Song Name: " + songs[i].name);
                 console.log("Preview Track: " + songs[i].preview_url);
                 console.log("Album: " + songs[i].album.name);
+                console.log("-----------------------------------");
 
             }
 
@@ -168,14 +168,6 @@ runCommand(process.argv[2], process.argv.slice(3).join(" "));
 
 
 
-
-
-// let caseData = process.argv[2];
-
-
-
-// var options = process.argv.slice(3).join(' ');
-// console.log(options);
 
 
 
