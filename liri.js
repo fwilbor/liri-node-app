@@ -62,13 +62,13 @@ var getSpotify = function (songName) {
 };
 
 var getBands = function (artist) {
-    var queryURL = "https://rest.bandsintown.com/artists/" + "big+thief" + "/events?app_id=codingbootcamp";
+    var queryURL = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp";
 
 
     axios.get(queryURL).then(
         function (response) {
-            console.log(response.data);
-            console.log(response._events);
+            // console.log(response.data);
+            // console.log(response._events);
 
             var jsonData = response.data;
             if (!jsonData.length) {
